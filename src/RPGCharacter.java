@@ -39,11 +39,19 @@ public class RPGCharacter {
     public void equip(equipment weapon) {
         if (weapon != null) {
             if (weapon.getType().equals("sword")) {
-                e1 = weapon;
-                System.out.println("You equipped the " + weapon.getName());
+                if (e1.getType().equals("nothing")) {
+                    e1 = weapon;
+                    System.out.println("You equipped the " + weapon.getName());
+                } else {
+                    System.out.println("You already have a sword equipped.");
+                }
             } else if (weapon.getType().equals("shield")) {
-                e2 = weapon;
-                System.out.println("You equipped the " + weapon.getName());
+                if (e2.getType().equals("nothing")) {
+                    e2 = weapon;
+                    System.out.println("You equipped the " + weapon.getName());
+                } else {
+                    System.out.println("You already have a shield equipped.");
+                }
             } else {
                 System.out.println("Invalid equipment type: " + weapon.getType());
             }
