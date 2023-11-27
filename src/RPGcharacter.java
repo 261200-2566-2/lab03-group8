@@ -43,11 +43,11 @@ public class RPGcharacter {
     private void setStat(Weapon w){
         if(w.getType().equals("sword")) {
             runSpeed -=  runSpeedBase*(0.1+0.04*w.getLv()); //weaponLv
-            damStat = w.getDamStat();
+            damStat += w.getDamStat();
         }
         if(w.getType().equals("shield")) {
             runSpeed -= runSpeedBase*(0.1+0.08*w.getLv()); //weaponLv
-            defStat = w.getDefStat();
+            defStat += w.getDefStat();
         }
     }
 
