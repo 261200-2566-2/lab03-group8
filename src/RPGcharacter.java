@@ -19,35 +19,35 @@ public class RPGcharacter {
         this.runSpeed = runSpeedBase;
         this.maxRunSpeed = runSpeedBase;
     }
-    private void LvUp(){
+     void LvUp(){
         lv++;
-        hp = 100 + 10*lv;
-        mp = 50 +2*lv;
+        hp = 100 + 10*lv; //charLv
+        mp = 50 +2*lv; //charLv
         maxRunSpeed += runSpeedBase*(0.1+0.03*lv);
-        setAllStat();
+        updateStat();
     }
     void equipWeapon(Weapon eq,String hand){
         if( hand.equals("left" ) && lh.getType().equals("nothing")){
             lh = eq;
-            setStat(eq,eq.getType());
+            setStat(eq);
         } else if(hand.equals("left" ) && !lh.getType().equals("nothing")){
             System.out.println("Left hand is full.");
         } else if( hand.equals("right" ) && rh.getType().equals("nothing")){
             rh = eq;
-            setStat(eq,eq.getType());
+            setStat(eq);
         } else if(hand.equals("right" ) && !rh.getType().equals("nothing")){
             System.out.println("Right hand is full.");
         }
     }
 
-    private void setStat(Weapon w,String wpType){
-        if(wpType.equals("sword")) {
-            runSpeed -=  runSpeedBase*(0.1+0.04*lv);
-            damStat = damStat+w.getDamStat() * (1+0.1*lv);
+    private void setStat(Weapon w){
+        if(w.getType().equals("sword")) {
+            runSpeed -=  runSpeedBase*(0.1+0.04*w.getLv()); //weaponLv
+            damStat = w.getDamStat();
         }
-        if(wpType.equals("shield")) {
-            runSpeed -= runSpeedBase*(0.1+0.08*lv);
-            defStat = defStat + w.getDefStat() * (1+0.05*lv);
+        if(w.getType().equals("shield")) {
+            runSpeed -= runSpeedBase*(0.1+0.08*w.getLv()); //weaponLv
+            defStat = w.getDefStat();
         }
     }
 
@@ -58,15 +58,15 @@ public class RPGcharacter {
         if(hand.equals("right")){
             rh = new Weapon("nothing");
         }
-        setAllStat();
+        updateStat();
     }
 
-    private void setAllStat(){
+    public void updateStat(){
         damStat =0;
         defStat =0;
         runSpeed = maxRunSpeed;
-        setStat(lh,lh.getType());
-        setStat(rh,rh.getType());
+        setStat(lh); //left hand
+        setStat(rh); //right hand
     }
 
     void statusWindow(){
@@ -80,10 +80,10 @@ public class RPGcharacter {
         System.out.println("     defStat : "+defStat);
         System.out.println("    _________________      ");
         System.out.print("    leftHand : "+lh.getType());
-        if(!lh.getType().equals("nothing")) System.out.println("(" +lh.getName()+")");
+        if(!lh.getType().equals("nothing")) System.out.println("(" +lh.getName()+" lv."+lh.getLv()+")");
         else System.out.println(" ");
         System.out.print("   rightHand : "+rh.getType());
-        if(!rh.getType().equals("nothing")) System.out.println("(" +rh.getName()+")");
+        if(!rh.getType().equals("nothing")) System.out.println("(" +rh.getName()+" lv."+rh.getLv()+")");
         else System.out.println(" ");
         System.out.println("_____________________________");
         System.out.println(" ");

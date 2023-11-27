@@ -29,10 +29,15 @@ public class Test {
         m.removeWeapon("right");
         m.statusWindow();
 
-        //f.LvUp();
+        f.LvUp();
         f.statusWindow();
 
-        //m.LvUp();
+        m.LvUp();
         m.statusWindow();
+
+        r.lvUp(f);
+        r.lvUp(f);
+        r.lvUp(f);
+        f.statusWindow();
     }
 }
